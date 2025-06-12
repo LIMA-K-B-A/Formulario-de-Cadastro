@@ -64,7 +64,7 @@ function mostrarBoasVindas() {
 // Função para criar elemento de participante
 function criarElementoParticipante(participante) {
     const div = document.createElement('div');
-    div.className = `participante ${participante.tipoIngresso} hover-card`;
+    div.className = `participante ${participante.tipoIngresso} hover-card relative`;
 
     const iconeTipo = {
         'vip': 'fa-crown text-yellow-500',
@@ -73,35 +73,33 @@ function criarElementoParticipante(participante) {
     }[participante.tipoIngresso];
 
     const conteudo = `
-        <div class="flex items-start justify-between">
-            <div class="flex-1">
-                <h3 class="text-xl font-mono text-green-500 mb-2">
-                    <i class="fas ${iconeTipo} mr-2"></i>
-                    ${participante.nome}
-                </h3>
-                <p class="text-green-400/80 mb-1">
-                    <i class="fas fa-envelope text-green-500 mr-2"></i>
-                    ${participante.email}
+        <button class="btn-remover absolute top-2 right-2 aspect-square h-6 flex items-center justify-center bg-red-500/20 text-red-500 rounded-full hover:bg-red-500/40 transition-colors border border-red-500/30 z-10 p-0" 
+                data-email="${participante.email}" title="Remover participante">
+            <i class="fas fa-trash-alt text-xs"></i>
+        </button>
+        <div class="flex-1">
+            <h3 class="text-xl font-mono text-green-500 mb-2">
+                <i class="fas ${iconeTipo} mr-2"></i>
+                ${participante.nome}
+            </h3>
+            <p class="text-green-400/80 mb-1">
+                <i class="fas fa-envelope text-green-500 mr-2"></i>
+                ${participante.email}
+            </p>
+            <p class="text-green-400/80 mb-1">
+                <i class="fas ${participante.presenca ? 'fa-check-circle text-green-500' : 'fa-times-circle text-red-500'} mr-2"></i>
+                Presença: ${participante.presenca ? 'Confirmada' : 'Não confirmada'}
+            </p>
+            <p class="text-green-400/80 mb-1">
+                <i class="fas fa-ticket-alt text-green-500 mr-2"></i>
+                Tipo de ingresso: ${participante.tipoIngresso.toUpperCase()}
+            </p>
+            ${participante.novidades ? `
+                <p class="text-green-400/80">
+                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                    Interesse em: ${participante.assuntos.join(', ')}
                 </p>
-                <p class="text-green-400/80 mb-1">
-                    <i class="fas ${participante.presenca ? 'fa-check-circle text-green-500' : 'fa-times-circle text-red-500'} mr-2"></i>
-                    Presença: ${participante.presenca ? 'Confirmada' : 'Não confirmada'}
-                </p>
-                <p class="text-green-400/80 mb-1">
-                    <i class="fas fa-ticket-alt text-green-500 mr-2"></i>
-                    Tipo de ingresso: ${participante.tipoIngresso.toUpperCase()}
-                </p>
-                ${participante.novidades ? `
-                    <p class="text-green-400/80">
-                        <i class="fas fa-star text-yellow-500 mr-2"></i>
-                        Interesse em: ${participante.assuntos.join(', ')}
-                    </p>
-                ` : ''}
-            </div>
-            <button class="btn-remover bg-red-500/20 text-red-500 px-3 py-1 rounded hover:bg-red-500/30 transition-colors border border-red-500/30" 
-                    data-email="${participante.email}">
-                <i class="fas fa-trash-alt"></i>
-            </button>
+            ` : ''}
         </div>
     `;
 
