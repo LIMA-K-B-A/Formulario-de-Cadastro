@@ -73,7 +73,7 @@ function criarElementoParticipante(participante) {
     }[participante.tipoIngresso];
 
     const conteudo = `
-        <button class="btn-remover absolute top-2 right-2 aspect-square h-6 flex items-center justify-center bg-red-500/20 text-red-500 rounded-full hover:bg-red-500/40 transition-colors border border-red-500/30 z-10 p-0" 
+        <button class="btn-remover absolute top-2 right-2 flex items-center justify-center p-0.5 bg-red-500/20 text-red-500 rounded-full hover:bg-red-500/40 transition-colors border border-red-500/30 z-10" 
                 data-email="${participante.email}" title="Remover participante">
             <i class="fas fa-trash-alt text-xs"></i>
         </button>
