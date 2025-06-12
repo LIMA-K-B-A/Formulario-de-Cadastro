@@ -10,7 +10,10 @@ body {
     background-color: #000;
     color: var(--primary-color);
     line-height: 1.6;
-    padding: 1rem;
+    padding: 0;
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
 }
 
 /* Estilos Mobile First */
@@ -487,4 +490,23 @@ input:focus, select:focus {
   #lista-participantes.glass-card {
     margin-bottom: 2.5rem;
   }
+}
+
+main, .max-w-5xl {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    float: none !important;
+    display: block;
+}
+
+#popup-confirmacao button {
+    min-width: unset !important;
+    max-width: 120px !important;
+    width: auto !important;
+    white-space: nowrap;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    font-size: 0.95rem !important;
 } 

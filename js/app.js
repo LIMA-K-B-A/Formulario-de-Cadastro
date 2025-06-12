@@ -191,12 +191,42 @@ function handleSubmit(event) {
 function handleRemoverParticipante(event) {
     if (event.target.closest('.btn-remover')) {
         const email = event.target.closest('.btn-remover').dataset.email;
-        if (confirm('Tem certeza que deseja remover este participante?')) {
+        mostrarPopupConfirmacao(() => {
             participantes = participantes.filter(p => p.email !== email);
             atualizarListaParticipantes();
             mostrarNotificacao('Participante removido com sucesso!');
-        }
+        });
     }
+}
+
+// Popup customizado de confirmação
+function mostrarPopupConfirmacao(onConfirm) {
+    // Remover popup antigo se existir
+    const popupAntigo = document.getElementById('popup-confirmacao');
+    if (popupAntigo) popupAntigo.remove();
+
+    const popup = document.createElement('div');
+    popup.id = 'popup-confirmacao';
+    popup.innerHTML = `
+        <div class="fixed inset-0 bg-black/80 flex items-center justify-center z-[9999]">
+            <div class="bg-[#0a1812] border border-green-500/40 rounded-xl p-8 shadow-2xl flex flex-col items-center max-w-xs w-full">
+                <i class='fas fa-exclamation-triangle text-yellow-400 text-4xl mb-4'></i>
+                <p class="text-green-400 font-mono mb-6 text-center">Tem certeza que deseja remover este participante?</p>
+                <div class="flex gap-2 justify-center">
+                    <button id="btnConfirmarRemover" class="bg-red-600 hover:bg-red-700 text-white font-mono px-3 py-1 rounded transition-colors text-sm">Remover</button>
+                    <button id="btnCancelarRemover" class="bg-green-700 hover:bg-green-800 text-white font-mono px-3 py-1 rounded transition-colors text-sm">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(popup);
+    document.getElementById('btnConfirmarRemover').onclick = () => {
+        popup.remove();
+        onConfirm();
+    };
+    document.getElementById('btnCancelarRemover').onclick = () => {
+        popup.remove();
+    };
 }
 
 // Função para mostrar/ocultar campo de assuntos
